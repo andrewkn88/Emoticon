@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마음톡 · 우리 반 실시간 반응</title>
+<style>
+:root{font-family:system-ui,-apple-system,"맑은 고딕",sans-serif;color:#30342f;background:#faf8f1;font-size:16px;line-height:1.6}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer;min-height:48px;border:0;border-radius:16px;font-weight:750;color:inherit;transition:transform .18s,box-shadow .18s}button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 8px 20px #30342f12}button:focus-visible,input:focus-visible{outline:3px solid #476e49;outline-offset:4px}button:disabled{cursor:not-allowed;opacity:.55}[hidden]{display:none!important}.wrap{width:min(1040px,100%);padding:26px 24px 36px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.brand{font-size:24px;font-weight:850;letter-spacing:-1px}.brand span{display:inline-grid;place-items:center;background:#dfead8;width:42px;height:42px;border-radius:14px;margin-right:8px}.home{padding:10px 18px;background:#eeeee5;border:1px solid #dddfd2}.status{margin:22px 0 0;padding:12px 18px;border:1px solid #e0ddce;background:#fffdf5;border-radius:14px;overflow-wrap:anywhere}.status.ok{background:#eaf4e8;border-color:#b8d4ad}.status.error{color:#93441f;background:#fff0df}.intro{text-align:center;margin:48px 0 30px}.eyebrow{color:#60754e;font-weight:750;letter-spacing:2px}h1{font-size:clamp(29px,5vw,46px);line-height:1.3;letter-spacing:-1.5px;margin:12px 0}p{margin:10px 0;color:#65705f}.roles{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:30px auto}.role{padding:32px 20px;text-align:left;border:1px solid #d9e1d0;background:#e9f0e1}.role.student{background:#ffebc9;border-color:#efdab4}.role .symbol{font-size:44px;display:block;margin-bottom:16px}.role strong{display:block;font-size:28px}.role small{display:block;font-size:16px;font-weight:450;margin-top:6px}.login{max-width:520px;margin:24px auto;background:white;border:1px solid #e1e3d8;padding:24px;border-radius:22px}.login label{display:block;font-weight:700;margin-bottom:10px}.input-row{display:flex;gap:10px;flex-wrap:wrap}input{min-height:50px;min-width:0;width:100%;flex:1 1 180px;border:1px solid #b9c2ad;border-radius:12px;padding:10px 14px}.enter{background:#526d43;color:white;padding:12px 22px}.error-text{color:#a23f28;min-height:26px;margin-bottom:0}.note{text-align:center;font-size:16px;margin:26px auto;max-width:690px}.reactions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.reaction{padding:24px 12px;border:1px solid #e3d3a9;background:#ffebbd;font-size:21px}.reaction:nth-child(2){background:#ffe0e0;border-color:#e8bfc0}.reaction:nth-child(3){background:#e4def8;border-color:#cfc4e8}.reaction span{font-size:48px;display:block;margin-bottom:6px}.reaction.pop{animation:pop .3s ease}.send-message{text-align:center;min-height:28px;margin:16px 0 26px}.board{background:#fffefa;border:1px solid #e3e5d9;border-radius:26px;padding:28px;margin-top:24px;box-shadow:0 10px 35px #474d3410}.board-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}h2{font-size:22px;margin:0}.live-tag{color:#526d43;background:#edf3e8;padding:5px 12px;border-radius:30px}.stage{height:190px;position:relative;overflow:hidden;border-radius:18px;background:radial-gradient(ellipse at center,#f4f4e5,transparent 70%);display:grid;place-items:center;margin:10px 0}.empty{text-align:center;padding:16px}.float{position:absolute;bottom:5px;font-size:44px;animation:rise 3s ease-out forwards;pointer-events:none}.total{text-align:center;font-size:24px;font-weight:750;margin:10px 0 24px}.total strong{font-size:44px;color:#51693f;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.counts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.count{background:#f4f4ec;border-radius:16px;padding:14px;text-align:center}.count strong{display:block;font-size:28px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.foot{text-align:center;margin-top:28px;color:#77806f}.teacher .stage{height:260px}.teacher .total{font-size:28px}.teacher .total strong{font-size:60px}@keyframes pop{50%{transform:scale(1.06)}}@keyframes rise{0%{opacity:0;transform:translateY(10px) scale(.7)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(-180px) rotate(12deg)}}@media(max-width:560px){.wrap{padding:18px 16px}.intro{margin-top:30px}.roles{grid-template-columns:1fr;gap:12px}.role{padding:22px}.role .symbol{float:right;margin:0}.reaction{font-size:16px;padding:18px 6px}.reaction span{font-size:36px}.reactions{gap:8px}.board{padding:18px}.counts{gap:6px}.count{padding:12px 5px}.count strong{font-size:24px}.login{padding:18px}.teacher .total strong{font-size:46px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><span aria-hidden="true">✳</span>마음톡</div><button class="home" id="home">처음으로</button></header>
+<div class="status" id="connection" role="status">연결을 준비하고 있어요…</div>
+<main>
+<section id="welcome">
+<div class="intro"><div class="eyebrow">함께 배우고, 마음을 나눠요</div><h1>작은 반응으로<br>함께 만드는 우리 수업</h1><p>오늘은 어떤 마음인가요? 내 역할을 선택해 주세요.</p></div>
+<div class="roles"><button class="role" id="teacherChoice"><span class="symbol" aria-hidden="true">🧑‍🏫</span><strong>강사 모드</strong><small>우리 반의 반응을 한눈에 봐요 →</small></button><button class="role student" id="studentChoice"><span class="symbol" aria-hidden="true">🙋</span><strong>학생 모드</strong><small>이모티콘으로 내 마음을 전해요 →</small></button></div>
+<form class="login" id="login" hidden><label for="password">강사 비밀번호</label><div class="input-row"><input id="password" type="password" inputmode="numeric" autocomplete="off" placeholder="비밀번호를 입력해 주세요" aria-describedby="passwordError" required><button class="enter" type="submit">입장하기</button></div><p class="error-text" id="passwordError" role="alert"></p></form>
+<p class="note">말하지 않아도 전해지는 마음.<br>좋아요, 공감, 응원을 함께 나눠 보세요.</p>
+</section>
+<section id="room" hidden>
+<div class="intro"><div class="eyebrow" id="modeLabel">학생 모드</div><h1 id="roomTitle" tabindex="-1">지금 내 반응을 보내요!</h1><p id="roomDescription">마음에 드는 버튼을 눌러 주세요. 여러 번 보내도 좋아요.</p></div>
+<div id="studentControls"><div class="reactions"><button class="reaction" data-kind="like" disabled><span aria-hidden="true">👍</span>👍 좋아요</button><button class="reaction" data-kind="heart" disabled><span aria-hidden="true">❤️</span>❤️ 공감해요</button><button class="reaction" data-kind="clap" disabled><span aria-hidden="true">👏</span>👏 응원해요</button></div><p class="send-message" id="sendMessage" role="status">연결되면 반응을 보낼 수 있어요.</p></div>
+<div class="board"><div class="board-head"><h2>우리 반의 실시간 반응</h2><span class="live-tag" id="boardState">연결 대기</span></div><div class="stage" id="stage" aria-hidden="true"><p class="empty" id="empty">반응이 모이면 이곳에 나타나요 🌱</p></div><div class="total">지금까지 반응 <strong id="total">—</strong>회</div><div class="counts"><div class="count">👍 좋아요<strong id="likeCount">—</strong></div><div class="count">❤️ 공감해요<strong id="heartCount">—</strong></div><div class="count">👏 응원해요<strong id="clapCount">—</strong></div></div><p class="note">같은 수업에 참여한 모두의 누적 반응이에요.</p></div>
+</section>
+</main>
+<footer class="foot">하나의 반응, 더 가까워지는 우리 반</footer>
+</div>
+<script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-database-compat.js"></script>
+<script>
+'use strict';
+// 전달받은 databaseURL의 마크다운 링크 표기만 제거한 실제 주소입니다.
+const firebaseConfig = {
+apiKey: "AIzaSyD85W1HFM0dug1dLObkGtGO1DerPmdg2wk",
+authDomain: "test-8fc9b.firebaseapp.com",
+databaseURL: "https://test-8fc9b-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "test-8fc9b",
+storageBucket: "test-8fc9b.firebasestorage.app",
+messagingSenderId: "334720536590",
+appId: "1:334720536590:web:1e599f9a00d92301e82c5f"
+};
+// 1004는 실습용 화면 진입 제한입니다. 실제 데이터 보안을 보장하지 않습니다.
+const $ = id => document.getElementById(id);
+const kinds = {like:'👍',heart:'❤️',clap:'👏'};
+let connected=false, readable=false, ref=null, initialized=false, latest={}, rendered=new Set();
+const pending=new Set(); let successes=0, failures=0;
+function status(message,type=''){ $('connection').textContent=message; $('connection').className='status '+type; }
+function availability(){ document.querySelectorAll('[data-kind]').forEach(b=>b.disabled=!(connected&&readable)); $('boardState').textContent=connected&&readable?'● 실시간 연결':'연결 대기'; }
+function resetLogin(){ $('login').reset(); $('passwordError').textContent=''; $('password').removeAttribute('aria-invalid'); $('login').hidden=true; }
+function enter(mode){ resetLogin(); $('welcome').hidden=true; $('room').hidden=false; const teacher=mode==='teacher'; $('room').classList.toggle('teacher',teacher); $('studentControls').hidden=teacher; $('modeLabel').textContent=teacher?'강사 모드':'학생 모드'; $('roomTitle').textContent=teacher?'우리 반 실시간 반응':'지금 내 반응을 보내요!'; $('roomDescription').textContent=teacher?'학생들의 마음이 이곳에 모여요. 함께 반응을 살펴보세요.':'마음에 드는 버튼을 눌러 주세요. 여러 번 보내도 좋아요.'; $('roomTitle').focus(); }
+$('teacherChoice').onclick=()=>{ resetLogin(); $('login').hidden=false; $('password').focus(); };
+$('studentChoice').onclick=()=>enter('student');
+$('home').onclick=()=>{resetLogin();$('room').hidden=true;$('welcome').hidden=false;$('teacherChoice').focus();};
+$('login').onsubmit=e=>{ e.preventDefault(); if($('password').value==='1004')enter('teacher'); else{ $('passwordError').textContent='비밀번호가 맞지 않아요. 다시 입력해 주세요.'; $('password').setAttribute('aria-invalid','true'); $('password').focus(); $('password').select(); } };
+function floatEmoji(kind){ if($('room').hidden)return; const node=document.createElement('span'); node.className='float'; node.textContent=kinds[kind]; node.style.left=(8+Math.random()*76)+'%'; $('stage').append(node); setTimeout(()=>node.remove(),3100); }
+function render(){ const counts={like:0,heart:0,clap:0}, next=new Set(); let fresh=[];
+ for(const [key,event] of Object.entries(latest)){ if(!event||!Object.hasOwn(kinds,event.kind)||pending.has(key))continue; counts[event.kind]++;next.add(key);if(initialized&&!rendered.has(key))fresh.push(event.kind); }
+ rendered=next; initialized=true; for(const kind of Object.keys(counts))$(kind+'Count').textContent=counts[kind].toLocaleString('ko-KR'); $('total').textContent=Object.values(counts).reduce((a,b)=>a+b,0).toLocaleString('ko-KR'); $('empty').textContent=next.size?'함께 나누는 마음이 쌓이고 있어요 ✨':'첫 반응을 기다리고 있어요 🌱';
+ // 애니메이션만 최대 24개로 제한합니다. 누적 집계는 모든 반응을 포함합니다.
+ fresh.slice(-24).forEach(floatEmoji);
+}
+function delivery(){ $('sendMessage').textContent=`전송 확인 ${successes}회 · 확인 대기 ${pending.size}회 · 전송 실패 ${failures}회`+(pending.size?' — 서버의 저장 확인을 기다리고 있어요.':'')+(failures?' — 실패한 반응은 다시 눌러 보내 주세요.':''); }
+document.querySelectorAll('[data-kind]').forEach(button=>button.onclick=async()=>{
+ if(!connected||!readable){$('sendMessage').textContent='연결이 끊겨 보내지 못했어요. 연결 후 다시 눌러 주세요.';return;}
+ button.classList.remove('pop');void button.offsetWidth;button.classList.add('pop');
+ const eventRef=ref.push(); pending.add(eventRef.key);delivery();
+ try{await eventRef.set({kind:button.dataset.kind,createdAt:firebase.database.ServerValue.TIMESTAMP});pending.delete(eventRef.key);successes++;render();delivery();}
+ catch(error){pending.delete(eventRef.key);delete latest[eventRef.key];failures++;render();delivery();}
+});
+function start(){
+ if(!firebaseConfig.databaseURL){status('설정 필요: databaseURL이 포함된 Firebase 설정값이 아직 없어요. 강사에게 설정을 요청해 주세요.','error');return;}
+ if(!firebaseConfig.apiKey||!firebaseConfig.projectId){status('설정 필요: Firebase 설정값 전체가 필요해요.','error');return;}
+ if(!window.firebase){status('연결 실패: Firebase를 불러오지 못했어요. 인터넷 연결을 확인하고 새로고침해 주세요.','error');return;}
+ try{firebase.initializeApp(firebaseConfig);const db=firebase.database();ref=db.ref('practice/reactions');
+ db.ref('.info/connected').on('value',snapshot=>{connected=snapshot.val()===true;status(connected?'서버에 연결되었어요.'+(readable?' 반응을 함께 나눠 보세요.':' 반응을 불러오고 있어요.'):'연결이 끊겼거나 연결 중이에요. 인터넷 연결을 확인해 주세요. 대기 중인 전송은 재연결 후 처리돼요.',connected?'ok':'');availability();});
+ ref.on('value',snapshot=>{latest=snapshot.val()||{};readable=true;render();availability();if(connected)status('실시간 연결 완료 · 우리 반의 반응을 함께 보고 있어요.','ok');if(!pending.size&&!successes&&!failures)$('sendMessage').textContent='준비됐어요! 내 마음을 보내 보세요.';},()=>{readable=false;availability();status('반응을 읽지 못했어요. Firebase 보안 규칙과 설정을 확인한 뒤 새로고침해 주세요.','error');});
+ }catch(error){status('연결 실패: Firebase 설정값과 데이터베이스 주소를 확인해 주세요.','error');}
+}
+start();
+</script>
+</body>
+</html>
